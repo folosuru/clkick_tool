@@ -1,0 +1,54 @@
+
+
+/*step_data(cnt,)
+
+      0 | 1 | 2 | 3   | 4  | 5  | 6  | 7  | 8 | 9 |
+--------------------------------
+null | 0 |
+none | 1 | X | Y |goto|wait                       |
+mouse| 2 | X | Y |goto|wait| X  | Y  |type|   |
+key  | 3 | X | Y |goto|wait|ID  |type|    |   |
+if   | 4 | X | Y |goto|wait|goto|type| R  | G | B |
+ˆÚ“® | 5 | X | Y |goto|wait|
+
+—v‘f‘½‚·‚¬ƒƒƒ^
+*/
+
+
+
+#module step 
+  #deffunc NewStep
+      foreach step_data
+        if step_data(cnt,0) = 0{
+          step_data(cnt,0) = 1
+          dialog cnt
+          break
+        }
+        loop
+      return result
+
+  #deffunc EditStep int Stepid,array p2, var content
+    if length(p2)!=1{
+        foreach p2
+          step_data(Stepid,cnt) = p2(cnt)
+          loop
+        return
+    }
+    step_data(Stepid,key)=content
+    return
+
+  #defcfunc GetStep int Stepid
+    dim result_array,10
+    repeat 10
+      result_array(cnt) = step_data(Blockid,cnt)
+      loop
+    return result_array
+
+
+
+  #deffunc ResetStep
+      dim step_data,100,10
+      step_data(0,0)=255  //—áŠO
+      return
+
+#global

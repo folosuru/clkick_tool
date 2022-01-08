@@ -1,0 +1,19 @@
+#include "step.hsp"
+#include "UI.hsp"
+screen 0,
+
+
+onexit *exit
+onclick *click
+ResetStep
+CreateMenu
+stop
+*click
+stop
+
+
+*exit
+  end
+
+*fa
+dialog

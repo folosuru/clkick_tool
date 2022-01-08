@@ -1,0 +1,34 @@
+//#include "block.hsp"
+#include "./utl/Utl.hsp"
+#module Menu
+#deffunc CreateMenu
+  screen 1, 280, 480, screen_tool
+  gsel 1,2
+  syscolor 4
+  boxf
+  objsize 280,50
+  button gosub "Add", *Add
+  button gosub "Run",*doRun
+
+return result
+
+#deffunc Drawstep int type,int SelectBlock
+  redraw 0
+  
+  redraw 1
+return result
+
+
+
+
+*Add
+newstep
+
+return
+*dorun
+  return
+
+
+
+
+#global

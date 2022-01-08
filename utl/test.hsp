@@ -1,0 +1,46 @@
+#include "Utl.hsp"
+
+screen 0,960,540
+
+
+font msgothic,30
+mes "roundsq sample"
+font msgothic,24
+roundsq 0,50,100,100,100
+pos 50,150
+admes "100",1
+
+roundsq 125,50,100,100,80
+pos 175,150
+admes "80",1
+
+roundsq 250,50,100,100,60
+pos 300,150
+admes "60",1
+
+roundsq 375,50,100,100,40
+pos 425,150
+admes "40",1
+
+roundsq 500,50,100,100,20
+pos 550,150
+admes "20",1
+
+roundsq 625,50,100,100,0
+pos 675,150
+admes "0",1
+
+font msgothic,30
+pos 0,200
+mes "admes sample"
+color 255,0,0
+boxf 149,250,151,350
+color
+pos 150,280:admes "Left",0,2
+pos 150,300:admes "center",1,1
+pos 150,320:admes "Right",2,0
+
+onkey *key
+stop
+*key
+  mes fetchkey(13)

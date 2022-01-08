@@ -1,0 +1,83 @@
+#module "Util_folo" r,g,b
+
+
+
+
+  #deffunc roundsq int point_x , int point_y , int size_width , int size_height , int diameter
+    circle point_x , point_y , point_x+diameter , point_y+diameter
+    circle point_x+size_width , point_y , point_x+size_width-diameter , point_y+diameter
+    circle point_x , point_y+size_height , point_x+diameter , point_y+size_height-diameter
+    circle point_x+size_width , point_y+size_height , point_x+size_width-diameter , point_y+size_height-diameter
+
+    boxf point_x+diameter/2 , point_y , point_x+size_width-diameter/2 , point_y+size_height
+    boxf point_x , point_y+diameter/2 , point_x+size_width , point_y+size_height-diameter/2
+
+    return result
+
+  #deffunc subcolor int input_r ,int input_g ,int input_b/*第二描画色セット。*/
+    r=input_r:g=input_g:b=input_b
+    return result
+
+  #defcfunc fetchkey int keycode,  /* キーの状態を関数で取得。 */
+    getkey result,keycode
+    return result
+
+  #deffunc admes str text, int alignment,int position
+    redraw 0
+    cx=ginfo_cx:cy=ginfo_cy:max_text_size=0
+    text_=text  /*謎のバグ回避用。*/
+    split text_ , "\n", text_lines
+    line_count = stat
+    repeat line_count /*行ごとに描画→長さ取得→記録→一番長ければ最長記録更新*/
+      pos -10000,-10000/*カレントポジションを遥か遠くにして文字のサイズを測る、なんというゴリ押し*/
+      mes text_lines(cnt),1
+      text_size(cnt) =  ginfo_cx+10000
+      if max_text_size < text_size(cnt) :max_text_size = text_size(cnt)
+    loop
+
+    pos -10000,-10000
+    mes "HogeHogeHogeeeeeeeeee"
+    switch position /*y座標*/
+      case 0
+      	pos cx,cy
+      swbreak
+      case 1  /*中央*/
+        pos cx,cy-((ginfo_cy+10000)/2)
+        swbreak
+      case 2  /*下*/
+        pos cx,cy-(ginfo_cy+10000)
+        swbreak
+      default /*上(通常)*/
+        pos cx,cy
+        swbreak
+      swend
+
+
+    switch alignment
+	  case 0
+	  	mes text
+	  	swbreak
+      case 1  /*中央揃え*/
+          repeat line_count
+              pos cx-text_size(cnt)/2,ginfo_cy
+              mes text_lines(cnt)
+              loop
+          swbreak
+      case 2  /*右揃え*/
+          repeat line_count
+            pos cx-text_size(cnt),ginfo_cy
+            mes text_lines(cnt)
+            loop
+          swbreak
+      default   /*左寄せ*/
+          mes text
+          swbreak
+
+      swend
+    redraw 1
+    return result
+
+
+
+
+#global
