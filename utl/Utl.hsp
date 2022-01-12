@@ -3,7 +3,8 @@
 
 
 
-  #deffunc roundsq int point_x , int point_y , int size_width , int size_height , int diameter
+  #deffunc roundsq int point_x , int point_y , int size_width , int size_height , int radius
+    diameter = radius/2
     circle point_x , point_y , point_x+diameter , point_y+diameter
     circle point_x+size_width , point_y , point_x+size_width-diameter , point_y+diameter
     circle point_x , point_y+size_height , point_x+diameter , point_y+size_height-diameter
@@ -15,7 +16,7 @@
     return result
 
   #deffunc subcolor int input_r ,int input_g ,int input_b/*第二描画色セット。*/
-    r=input_r:g=input_g:b=input_b
+    subcolor_r=input_r:subcolor_g=input_g:subcolor_b=input_b
     return result
 
   #defcfunc fetchkey int keycode,  /* キーの状態を関数で取得。 */
@@ -77,7 +78,15 @@
     redraw 1
     return result
 
+  #deffunc roundsqgr int point_x , int point_y , int size_width , int size_height , int radius
+    subcolor_r-[カレントカラーR]
+    repeat radius
+      tmp = radius*radius - (radius-cnt) * (radius-cnt)
+      pos_X_left = radius - sqrt(tmp) + point_x //適っ当に書いたので動くかは不明。
+      pos_X_right = (size_width-radius) +sqrt(tmp)
+      loop
 
+  return result
 
 
 #global
