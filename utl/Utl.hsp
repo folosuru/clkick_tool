@@ -78,14 +78,19 @@
     redraw 1
     return result
 
-  #deffunc roundsqgr int point_x , int point_y , int size_width , int size_height , int radius
-    subcolor_r-[カレントカラーR]
-    repeat radius
-      tmp = radius*radius - (radius-cnt) * (radius-cnt)
-      pos_X_left = radius - sqrt(tmp) + point_x //適っ当に書いたので動くかは不明。
-      pos_X_right = (size_width-radius) +sqrt(tmp)
-      loop
+  #deffunc roundsqgr int point_x , int point_y , int size_width , int size_height , int radius , int direction
+    redraw 0
 
+    //subcolor_r-ginfo_r
+    if direction=0 {
+      repeat radius
+        tmp = sqrt(radius*radius - (radius-cnt) * (radius-cnt) )
+        line radius-tmp+point_x , point_y+cnt , point_x+size_width-radius+tmp , point_y+cnt
+        loop
+      repeat size_height-radius*2
+        line point_x,
+    }
+  redraw 1
   return result
 
 

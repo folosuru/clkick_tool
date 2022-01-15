@@ -40,6 +40,7 @@ pos 150,280:admes "Left",0,2
 pos 150,300:admes "center",1,1
 pos 150,320:admes "Right",2,0
 
+roundsqgr 375,250,300,100,50,
 onkey *key
 stop
 *key
