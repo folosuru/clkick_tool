@@ -81,14 +81,31 @@
   #deffunc roundsqgr int point_x , int point_y , int size_width , int size_height , int radius , int direction
     redraw 0
 
-    //subcolor_r-ginfo_r
+
     if direction=0 {
+      main_R = ginfo_R
+      main_G = ginfo_G
+      main_B = ginfo_B
+      grad_R = (subcolor_r-main_R)/(size_height-1)
+      grad_g = (subcolor_g-main_G)/(size_height-1)
+      grad_B = (subcolor_B-main_B)/(size_height-1)
+      point_2nd = point_y + radius
+      point_3rd = size_height - radius
       repeat radius
+        color main_R+grad_R*cnt,main_G+grad_g*cnt,main_B+grad_B*cnt
         tmp = sqrt(radius*radius - (radius-cnt) * (radius-cnt) )
-        line radius-tmp+point_x , point_y+cnt , point_x+size_width-radius+tmp , point_y+cnt
+        line radius-tmp+point_x , point_y+cnt , point_x+size_width-radius+tmp-1 , point_y+cnt
         loop
-      repeat size_height-radius*2
-        line point_x,
+      repeat size_height-1-radius*2
+        color main_R+grad_R*(cnt+radius),main_G+grad_g*(cnt+radius),main_B+grad_B*(cnt+radius)
+        line point_x, point_2nd+cnt, point_x+size_width-1, point_2nd+cnt
+        loop
+      repeat size_height-radius
+        color main_R+grad_R*(point_3rd+cnt) , main_G+grad_g*(point_3rd+cnt) , main_B+grad_B*(point_3rd+cnt)
+        tmp = sqrt(radius*radius - (cnt) * (cnt) )
+        line radius-tmp+point_x , point_y+point_3rd+cnt-1 , point_x+size_width-radius+tmp-1 , point_y+point_3rd+cnt-1
+        loop
+      print "a"+main_R+",R"+main_G+",G"+main_B+",B"
     }
   redraw 1
   return result
