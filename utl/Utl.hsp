@@ -105,7 +105,6 @@
         tmp = sqrt(radius*radius - (cnt) * (cnt) )
         line radius-tmp+point_x , point_y+point_3rd+cnt-1 , point_x+size_width-radius+tmp-1 , point_y+point_3rd+cnt-1
         loop
-      print "a"+main_R+",R"+main_G+",G"+main_B+",B"
     }
   redraw 1
   return result
