@@ -23,7 +23,7 @@ hoge = fetchkey(p1)
 p1(数字) …取得するキーコード。getkeyと同じ。
 
 admes　…mes命令に文字の揃え方・描画位置の変更を追加したものです。
-admes "text",p1p2
+admes "text",p1,p2
 "text"(文字) …表示させたい文章。
 p1(数字) …行の揃え方。
           0なら通常
