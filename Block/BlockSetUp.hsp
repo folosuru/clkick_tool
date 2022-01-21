@@ -1,5 +1,8 @@
 notesel data_file
-noteload ".\\BlockData.hsp"
+exist ".\\BlockData.hsp"
+if strsize != -1{
+  noteload ".\\BlockData.hsp"
+}
 screen 0,640,480
 chdir ".\\Blocks\\"
 dirlist files,"*.hsp"
