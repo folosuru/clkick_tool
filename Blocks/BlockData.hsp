@@ -1,8 +1,0 @@
-#module BlockTest1
-  #deffunc DrawBlock
-
-    return
-  #defcfunc GetBlockData int Blockid
-    code
-    return result
-#global

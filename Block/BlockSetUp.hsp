@@ -1,0 +1,43 @@
+notesel data_file
+noteload ".\\BlockData.hsp"
+screen 0,640,480
+chdir ".\\Blocks\\"
+dirlist files,"*.hsp"
+split files,"\n",file_list
+  text="// Please do NOT touch this file\n//頼むからこのファイルをいじらないで\n\n//.hspファイルの個数は"+str(length(file_list)-1)+"\n"
+    repeat length(file_list)-1
+      text+="#include \".\\\\Blocks\\\\"+ file_list(cnt) +"\"\n"
+      loop
+    text+= "#module BlockData\n"
+    text_sw="#deffunc DrawBlock int Blockid\n    switch Blockid\n"
+    repeat length(file_list)-1
+      text_sw+= "      case "+str(cnt+1)+"\n        DrawBlock_"+getpath(file_list(cnt),1)+"\n        swbreak\n"
+    loop
+  text_sw+="      default\n        dialog \"たぶんBlockidの引数が正しくない\",1,\"深刻ではないエラー\"\n        swbreak\n      swend\n    return\n"
+  text+=text_sw
+  strrep text_sw,"DrawBlock","DrawWindow"
+  text+=text_sw
+  text_sw="#defcfunc RunBlock int Blockid\n    switch Blockid\n"
+  repeat length(file_list)-1
+        text_sw+= "      case "+str(cnt+1)+"\n        result = RunBlock_"+getpath(file_list(cnt),1)+"()\n        swbreak\n"
+      loop
+    text_sw+="      default\n        dialog \"たぶんBlockidの引数が正しくない\",1,\"深刻ではないエラー\"\n        result=0\n        swbreak\n      swend\n    return result\n"
+  text+=text_sw+"#global\n"
+
+print "BlockData.hsp generator"
+pos 0,40
+//mesbox text,640,440
+text_convert =text
+strrep text_convert,"\\",""
+strrep data_file,"\\",""
+//mesbox text_convert,640,480
+mesbox data_file,640,400
+
+if text_convert=data_file{
+  stop
+}else{
+  chdir "..\\"
+  notesel text
+  notesave "BlockData.hsp"
+  dialog "save file."
+}
