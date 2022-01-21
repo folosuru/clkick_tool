@@ -1,0 +1,28 @@
+// Please do NOT touch this file
+//頼むからこのファイルをいじらないで
+
+//.hspファイルの個数は0
+#module BlockData
+#deffunc DrawBlock int Blockid
+    switch Blockid
+      default
+        dialog "たぶんBlockidの引数が正しくない",1,"深刻ではないエラー"
+        swbreak
+      swend
+    return
+#deffunc DrawWindow int Blockid
+    switch Blockid
+      default
+        dialog "たぶんBlockidの引数が正しくない",1,"深刻ではないエラー"
+        swbreak
+      swend
+    return
+#defcfunc RunBlock int Blockid
+    switch Blockid
+      default
+        dialog "たぶんBlockidの引数が正しくない",1,"深刻ではないエラー"
+        result=0
+        swbreak
+      swend
+    return result
+#global
